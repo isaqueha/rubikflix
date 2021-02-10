@@ -3,26 +3,32 @@ import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typogra
 import api from '../services/api';
 
 const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
+    card: {
+        width: '20rem',
+        height: '34rem',
+        margin: 5
     },
-    media: {
-        height: 140,
+    image: {
+        height: '30rem',
     },
 });
 
-const Discover = () => {
+const Discover = ({ path, query }) => {
     const classes = useStyles();
     const [titles, setTitles] = useState([]);
 
+    const fetchDiscovery = async () => {
+        const discover = await api.get(path, { params: { query: query } });
+        setTitles(discover.data.results)
+    };
 
     useEffect(() => {
-        const fetchDiscovery = async () => {
-            const discover = await api.get('discover/movie');
-            setTitles(discover.data.results)
-        };
-        fetchDiscovery();
-    }, [])
+        if (query !== '') {
+            fetchDiscovery();
+        } else {
+            setTitles([])
+        }
+    }, [query])
 
     return (
         <Grid
@@ -32,12 +38,12 @@ const Discover = () => {
             alignItems="center"
         >
             {titles.map((title, index) => (
-                <Card className={classes.root} key={index}>
+                <Card className={classes.card} key={index}>
                     <CardActionArea>
                         <CardMedia
-                            className={classes.media}
+                            className={classes.image}
                             image={`https://image.tmdb.org/t/p/original/${title.poster_path}`}
-                            title="Contemplative Reptile" />
+                            title="Title" />
                         <CardContent>
                             <Typography gutterBottom variant="h6" component="h3">
                                 {title.title}
