@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
 import api from '../services/api';
+import {
+    useHistory
+} from "react-router-dom";
 
 const useStyles = makeStyles({
     card: {
@@ -16,7 +19,11 @@ const useStyles = makeStyles({
 const Discover = ({ path, query }) => {
     const classes = useStyles();
     const [titles, setTitles] = useState([]);
+    let history = useHistory();
 
+    const handleMovieClick = () => {
+        history.push('/movie')
+    }
 
     useEffect(() => {
         const fetchDiscovery = async () => {
@@ -40,7 +47,7 @@ const Discover = ({ path, query }) => {
         >
             {titles.map((title, index) => (
                 <Card className={classes.card} key={index}>
-                    <CardActionArea>
+                    <CardActionArea onClick={handleMovieClick} >
                         <CardMedia
                             className={classes.image}
                             image={`https://image.tmdb.org/t/p/original/${title.poster_path}`}
