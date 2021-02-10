@@ -17,18 +17,19 @@ const Discover = ({ path, query }) => {
     const classes = useStyles();
     const [titles, setTitles] = useState([]);
 
-    const fetchDiscovery = async () => {
-        const discover = await api.get(path, { params: { query: query } });
-        setTitles(discover.data.results)
-    };
 
     useEffect(() => {
+        const fetchDiscovery = async () => {
+            const discover = await api.get(path, { params: { query: query } });
+            setTitles(discover.data.results)
+        };
+
         if (query !== '') {
             fetchDiscovery();
         } else {
             setTitles([])
         }
-    }, [query])
+    }, [query, path])
 
     return (
         <Grid
