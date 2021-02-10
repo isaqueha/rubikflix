@@ -1,67 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
-import api from '../services/api';
-import {
-    useHistory
-} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Grid, Typography } from '@material-ui/core';
+import Movies from './movies';
 
-const useStyles = makeStyles({
-    card: {
-        width: '20rem',
-        height: '34rem',
-        margin: 5
-    },
-    image: {
-        height: '30rem',
-    },
-});
+const paths = {
+    discover: '/discover/movie',
+    search: '/search/movie',
+  };
 
-const Discover = ({ path, query }) => {
-    const classes = useStyles();
-    const [titles, setTitles] = useState([]);
-    let history = useHistory();
+  const titles = {
+    discover: 'Discover new Movies:',
+    search: 'Search Results:',
+  };
 
-    const handleMovieClick = () => {
-        history.push('/movie')
+const Discover = ({ query, rating }) => {
+    const [path, setPath] = useState(paths.discover);
+    const [title, setTitle] = useState(titles.discover);
+
+  useEffect(() => {
+    if (query !== '') {
+      setPath(paths.search);
+      setTitle(titles.search);
+    } else {
+      setPath(paths.discover);
+      setTitle(titles.discover);
     }
+  }, [query]);
 
-    useEffect(() => {
-        const fetchDiscovery = async () => {
-            const discover = await api.get(path, { params: { query: query } });
-            setTitles(discover.data.results)
-        };
-
-        if (query !== '') {
-            fetchDiscovery();
-        } else {
-            setTitles([])
-        }
-    }, [query, path])
-
-    return (
-        <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-        >
-            {titles.map((title, index) => (
-                <Card className={classes.card} key={index}>
-                    <CardActionArea onClick={handleMovieClick} >
-                        <CardMedia
-                            className={classes.image}
-                            image={`https://image.tmdb.org/t/p/original/${title.poster_path}`}
-                            title="Title" />
-                        <CardContent>
-                            <Typography gutterBottom variant="h6" component="h3">
-                                {title.title}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card >
-            ))}
-        </Grid>
-    );
-}
+  return (
+    <Grid container direction="column" justify="center" alignItems="center">
+      <Typography align="left" variant="h3">
+        {title}
+      </Typography>
+      <Movies path={path} query={query} ratingFilter={rating} />
+    </Grid>
+  );
+};
 
 export default Discover;
