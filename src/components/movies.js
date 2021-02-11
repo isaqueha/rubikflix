@@ -11,7 +11,7 @@ import {
 import Rating from '@material-ui/lab/Rating';
 import api from '../services/api';
 import { useHistory } from 'react-router-dom';
-import notFound from '../static/not-found-cube.jpg'
+import notFoundImage from '../static/not-found-cube.jpg';
 
 const useStyles = makeStyles({
   card: {
@@ -30,12 +30,11 @@ const Movies = ({ path, query, rating }) => {
   const [filteredResults, setFilteredResults] = useState([]);
   let history = useHistory();
 
-  const handleMovieClick = () => {
-    history.push('/movie');
+  const handleMovieClick = (title) => {
+    history.push(`/movie/${title.id}`);
   };
 
   useEffect(() => {
-    query = query || null;
     const fetchPath = async () => {
       let request = await api.get(path, {
         params: {
@@ -59,21 +58,19 @@ const Movies = ({ path, query, rating }) => {
   }, [rating, titles]);
 
   return (
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      
-    >
+    <Grid container direction="row" justify="center" alignItems="center">
       {filteredResults.length ? (
         filteredResults.map((title, index) => (
-          <Card className={classes.card} key={index} >
-            <CardActionArea onClick={handleMovieClick}>
+          <Card className={classes.card} key={index}>
+            <CardActionArea onClick={() => handleMovieClick(title)}>
               <CardMedia
                 className={classes.image}
-                image={title.poster_path ? `https://image.tmdb.org/t/p/w300/${title.poster_path}` : notFound}
-                title={title.poster_path ? title.title : "Image unavailable"}
+                image={
+                  title.poster_path
+                    ? `https://image.tmdb.org/t/p/w300/${title.poster_path}`
+                    : notFoundImage
+                }
+                title={title.poster_path ? title.title : 'Image unavailable'}
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="h3" noWrap>
@@ -81,8 +78,8 @@ const Movies = ({ path, query, rating }) => {
                 </Typography>
                 <Rating
                   name="half-rating-read"
-                  size='small'
-                  value={(title.vote_average / 2)}
+                  size="small"
+                  value={title.vote_average / 2}
                   precision={0.1}
                   readOnly
                 />
