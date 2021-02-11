@@ -68,3 +68,31 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Links
+- Details: https://dribbble.com/shots/14791304-Movies-app-design/attachments/6497678?mode=media
+- Home screen: https://dribbble.com/shots/1682568-Flixus-Homepage-WIP/attachments/266477?mode=media
+- Grid Material UI: https://material-ui.com/components/grid/
+
+### BUGS
+- Search Header:
+    - Search field color
+    - Filter hover value color to yellow
+    - Header bar dont resize on mobile
+    - Add a Rubik Logo svg
+- Discover page:
+    - Rubik theming
+    - Smaller title and sorting information
+    - No reloading images, use style hidden.
+    - Search, enter details, return to search, 2 requests
+- Details:
+    - Details Description needs more spacing between
+    - Details side poster image needs to be justified
+    - Details rating number needs to be bigger and yellow
+    - Details informations are too far apart vertically
+    - Back button on Details Page
+
+- Redux: https://react-redux.js.org/introduction/quick-start
+    - Filter: https://stackoverflow.com/questions/40342381/react-redux-create-a-search-filter
+- Lazy loading: https://web.dev/code-splitting-suspense/?utm_source=lighthouse&utm_medium=devtools
