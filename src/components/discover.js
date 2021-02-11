@@ -3,12 +3,12 @@ import { Grid, Typography } from '@material-ui/core';
 import Movies from './movies';
 
 const paths = {
-    discover: '/discover/movie',
+    discover: '/discover/movie',    
     search: '/search/movie',
   };
 
   const titles = {
-    discover: 'Discover new Movies:',
+    discover: 'Discover new Movies, sorted by popularity:',
     search: 'Search Results:',
   };
 
@@ -23,6 +23,7 @@ const Discover = ({ query, rating }) => {
     } else {
       setPath(paths.discover);
       setTitle(titles.discover);
+      // By default, the discover api already brings movies sorted by popularity
     }
   }, [query]);
 
@@ -31,7 +32,7 @@ const Discover = ({ query, rating }) => {
       <Typography align="left" variant="h3">
         {title}
       </Typography>
-      <Movies path={path} query={query} ratingFilter={rating} />
+      <Movies path={path} query={query} rating={rating} />
     </Grid>
   );
 };

@@ -7,7 +7,7 @@ import Header from './components/header';
 
 function App() {
   const [search, setSearch] = useState('');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(null);
 
   const handleSearch = (event) => {
     const searchString = event.target.value;
@@ -15,8 +15,13 @@ function App() {
   };
 
   const handleRating = (event) => {
-    setRating(event.target.value);
-    alert(event.target.value);
+    const ratingValue = event.target.value * 2;
+    if (ratingValue !== rating) {
+      setRating(ratingValue);
+    } else {
+      // clear the filter
+      setRating(null);
+    }
   };
 
   return (
@@ -33,7 +38,7 @@ function App() {
             <Detail />
           </Route>
           <Route exact path="/">
-            <Discover query={search} ratingFilter={rating} />
+            <Discover query={search} rating={rating} />
           </Route>
         </Switch>
       </div>
