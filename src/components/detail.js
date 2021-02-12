@@ -129,14 +129,14 @@ const Detail = () => {
                 </Box>
                 <Grid container item direction="row">
                   <Typography className={classes.smallMargin}>
-                    {new Date(movieDetails.release_date).getFullYear()}
+                    {movieDetails.release_date && new Date(movieDetails.release_date).getFullYear()}
                   </Typography>
 
                   <Typography className={classes.smallMargin}>
                     {movieDetails.genres.map((genre) => genre.name).join(", ")}
                   </Typography>
                   <Typography className={classes.smallMargin}>
-                    {movieDetails.runtime} min
+                    {movieDetails.runtime ? `${movieDetails.runtime} min` : ''}
                   </Typography>
                   <Typography className={classes.smallMargin}>
                     <Link
@@ -144,7 +144,7 @@ const Detail = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      IMDB
+                      {movieDetails.imdb_id ? 'IMDB' : ''}
                     </Link>
                   </Typography>
                 </Grid>
