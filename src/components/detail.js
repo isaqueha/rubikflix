@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import api from '../services/api';
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import api from "../services/api";
 import {
   Box,
   Button,
@@ -8,37 +8,42 @@ import {
   Link,
   makeStyles,
   Typography,
-} from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import notFound from '../static/not-found-cube.jpg';
+} from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
+import notFound from "../static/not-found-cube.jpg";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const useStyles = makeStyles({
-  card: {
-    width: '300px',
-    height: '34rem',
-    margin: 10,
-  },
-  img: {
-    overflow: 'hidden',
-    maxHeight: '60vh',
-    margin: 0,
+  root: {
+    color: "white",
   },
   paper: {
-    backgroundColor: 'black',
-    width: '100%',
-    justifyContent: 'center',
-    display: 'flex',
+    backgroundColor: "black",
+    width: "100%",
+    justifyContent: "center",
+    display: "flex",
   },
-  image: {
-    maxHeight: '70vh',
-    // width: '100%',
+  introImage: {
+    overflow: "hidden",
+    maxHeight: "60vh",
   },
   title: {
-    width: '100%',
-    margin: 5,
+    width: "100%",
   },
   details: {
-    padding: '3vh',
+    padding: "3vh",
+    height: "100%",
+  },
+  ratingHover: {
+    textAlign: "left",
+    color: "#ffb400",
+    fontSize: "2rem",
+  },
+  sideImage: {
+    width: "20rem",
+  },
+  smallMargin: {
+    margin: ".5rem",
   },
 });
 
@@ -49,11 +54,11 @@ const Detail = () => {
   let history = useHistory();
 
   const handleBackButton = () => {
-    history.push('/');
+    history.push("/");
   };
 
   useEffect(() => {
-    const movieId = location.pathname.split('/movie/')[1];
+    const movieId = location.pathname.split("/movie/")[1];
     const fetchMovie = async () => {
       let request = await api.get(`/movie/${movieId}`);
       setMovieDetails(request.data);
@@ -62,8 +67,7 @@ const Detail = () => {
   }, [location.pathname]);
 
   return (
-    <>
-      <Button onClick={handleBackButton}>Back</Button>
+    <div className={classes.root}>
       {movieDetails ? (
         <>
           <Grid
@@ -74,7 +78,7 @@ const Detail = () => {
           >
             <Grid item className={classes.paper}>
               <img
-                className={classes.img}
+                className={classes.introImage}
                 src={
                   movieDetails.backdrop_path
                     ? `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`
@@ -83,7 +87,7 @@ const Detail = () => {
                 alt={
                   movieDetails.poster_path
                     ? movieDetails.title
-                    : 'Image unavailable'
+                    : "Image unavailable"
                 }
               />
             </Grid>
@@ -100,22 +104,41 @@ const Detail = () => {
                 item
                 justify="start"
                 xs={12}
-                sm={8}
+                sm
                 className={classes.details}
               >
                 <Typography className={classes.title} variant="h3">
                   {movieDetails.title}
                 </Typography>
+                <Rating
+                  name="half-rating-read"
+                  size="large"
+                  className={classes.smallMargin}
+                  value={movieDetails.vote_average / 2}
+                  precision={0.1}
+                  readOnly
+                />
+                <Box width={50}>
+                  <Typography
+                    className={classes.ratingHover}
+                    align="left"
+                    width={50}
+                  >
+                    {movieDetails.vote_average}
+                  </Typography>
+                </Box>
                 <Grid container item direction="row">
-                  <Typography>
+                  <Typography className={classes.smallMargin}>
                     {new Date(movieDetails.release_date).getFullYear()}
                   </Typography>
-                  -
-                  <Typography>
-                    {movieDetails.genres.map((genre) => genre.name).join(', ')}
+
+                  <Typography className={classes.smallMargin}>
+                    {movieDetails.genres.map((genre) => genre.name).join(", ")}
                   </Typography>
-                  -<Typography>{movieDetails.runtime} min</Typography>-
-                  <Typography>
+                  <Typography className={classes.smallMargin}>
+                    {movieDetails.runtime} min
+                  </Typography>
+                  <Typography className={classes.smallMargin}>
                     <Link
                       href={`https://www.imdb.com/title/${movieDetails.imdb_id}`}
                       target="_blank"
@@ -125,23 +148,23 @@ const Detail = () => {
                     </Link>
                   </Typography>
                 </Grid>
-                <Rating
-                  name="half-rating-read"
+
+                <Typography className={classes.smallMargin}>
+                  {movieDetails.overview}
+                </Typography>
+                <Button
+                  onClick={handleBackButton}
                   size="large"
-                  value={movieDetails.vote_average / 2}
-                  precision={0.1}
-                  readOnly
-                />
-                <Box width={50}>
-                  <Typography align="left" width={50}>
-                    {movieDetails.vote_average}
-                  </Typography>
-                </Box>
-                <Typography>{movieDetails.overview}</Typography>
+                  variant="contained"
+                  className={classes.smallMargin}
+                  startIcon={<ArrowBackIcon />}
+                >
+                  Back
+                </Button>
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item>
                 <img
-                  className={classes.image}
+                  className={classes.sideImage}
                   src={
                     movieDetails.poster_path
                       ? `https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`
@@ -150,7 +173,7 @@ const Detail = () => {
                   alt={
                     movieDetails.poster_path
                       ? movieDetails.title
-                      : 'Image unavailable'
+                      : "Image unavailable"
                   }
                 />
               </Grid>
@@ -160,7 +183,7 @@ const Detail = () => {
       ) : (
         <Typography>No Details Found</Typography>
       )}
-    </>
+    </div>
   );
 };
 

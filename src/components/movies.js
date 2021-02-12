@@ -73,7 +73,7 @@ const Movies = ({ path, query, rating }) => {
                 title={title.poster_path ? title.title : 'Image unavailable'}
               />
               <CardContent>
-                <Typography gutterBottom variant="h6" component="h3" noWrap>
+                <Typography gutterBottom variant="h6" noWrap>
                   {title.title}
                 </Typography>
                 <Rating
