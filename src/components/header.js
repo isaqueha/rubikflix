@@ -52,7 +52,7 @@ const Header = ({ handleSearchChange, handleRatingChange }) => {
           {ratingHover !== null && (
             <Box width={30}>
               <Typography className={classes.ratingHover}>
-                {ratingHover !== -1 ? ratingHover : ratingValue}
+                {ratingHover > -1 ? ratingHover : ratingValue}
               </Typography>
             </Box>
           )}
@@ -66,11 +66,11 @@ const Header = ({ handleSearchChange, handleRatingChange }) => {
             if(newValue === null) {
               setRatingHover(newValue);  
             } 
-            setRatingValue(newValue);
+            setRatingValue(newValue ? newValue * 2: newValue);
             handleRatingChange(event);
           }}
           onChangeActive={(event, newHover) => {
-            setRatingHover(newHover);
+            setRatingHover(newHover * 2);
           }}
         />
       </Hidden>
