@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   search: {
@@ -26,6 +27,13 @@ const Header = ({ handleSearchChange, handleRatingChange }) => {
   const [ratingValue, setRatingValue] = useState("");
   const [ratingHover, setRatingHover] = useState("");
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      history.push(`/`);
+    } 
+  }
 
   return (
     <Grid container direction="row" justify="center" alignItems="center">
@@ -35,6 +43,7 @@ const Header = ({ handleSearchChange, handleRatingChange }) => {
         label="Search Movies"
         variant="outlined"
         onChange={(event) => handleSearchChange(event)}
+        onKeyPress={handleKeyPress}
       />
       <Grid>
         <Hidden only='xs'>
