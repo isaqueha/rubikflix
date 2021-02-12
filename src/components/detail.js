@@ -39,6 +39,10 @@ const useStyles = makeStyles({
     color: "#ffb400",
     fontSize: "2rem",
   },
+  overview: {
+    margin: ".5rem",
+    width: "100%",
+  },
   sideImage: {
     width: "20rem",
   },
@@ -149,7 +153,7 @@ const Detail = () => {
                   </Typography>
                 </Grid>
 
-                <Typography className={classes.smallMargin}>
+                <Typography className={classes.overview}>
                   {movieDetails.overview}
                 </Typography>
                 <Button
