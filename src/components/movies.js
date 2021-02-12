@@ -67,7 +67,7 @@ const Movies = ({ path, query, rating }) => {
                 className={classes.image}
                 image={
                   title.poster_path
-                    ? `https://image.tmdb.org/t/p/w300/${title.poster_path}`
+                    ? `https://image.tmdb.org/t/p/w500/${title.poster_path}`
                     : notFoundImage
                 }
                 title={title.poster_path ? title.title : 'Image unavailable'}
