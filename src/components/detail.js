@@ -22,10 +22,17 @@ const useStyles = makeStyles({
     width: "100%",
     justifyContent: "center",
     display: "flex",
+    position: "relative",
+  },
+  floatingButton: {
+    margin: "2rem",
+    position: "absolute",
+    left: 0,
   },
   introImage: {
     overflow: "hidden",
     maxHeight: "60vh",
+    height: "100%",
   },
   title: {
     width: "100%",
@@ -81,6 +88,15 @@ const Detail = () => {
             variant="outlined"
           >
             <Grid item className={classes.paper}>
+              <Button
+                onClick={handleBackButton}
+                size="large"
+                variant="contained"
+                className={classes.floatingButton}
+                startIcon={<ArrowBackIcon />}
+              >
+                Back
+              </Button>
               <img
                 className={classes.introImage}
                 src={
@@ -133,14 +149,15 @@ const Detail = () => {
                 </Box>
                 <Grid container item direction="row">
                   <Typography className={classes.smallMargin}>
-                    {movieDetails.release_date && new Date(movieDetails.release_date).getFullYear()}
+                    {movieDetails.release_date &&
+                      new Date(movieDetails.release_date).getFullYear()}
                   </Typography>
 
                   <Typography className={classes.smallMargin}>
                     {movieDetails.genres.map((genre) => genre.name).join(", ")}
                   </Typography>
                   <Typography className={classes.smallMargin}>
-                    {movieDetails.runtime ? `${movieDetails.runtime} min` : ''}
+                    {movieDetails.runtime ? `${movieDetails.runtime} min` : ""}
                   </Typography>
                   <Typography className={classes.smallMargin}>
                     <Link
@@ -148,7 +165,7 @@ const Detail = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {movieDetails.imdb_id ? 'IMDB' : ''}
+                      {movieDetails.imdb_id ? "IMDB" : ""}
                     </Link>
                   </Typography>
                 </Grid>
