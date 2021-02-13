@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import Content from "./components/content";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Detail from "./components/detail";
@@ -7,11 +6,6 @@ import Header from "./components/header";
 import { Box, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
-  header: {
-    height: "5rem",
-    backgroundColor: "white",
-    color: "black",
-  },
   content: {
     overflow: "auto",
     height: "auto",
@@ -43,12 +37,10 @@ function App() {
   return (
     <Router>
       <div>
-        <Box className={classes.header}>
-          <Header
-            handleSearchChange={handleSearch}
-            handleRatingChange={handleRating}
-          />
-        </Box>
+        <Header
+          handleSearchChange={handleSearch}
+          handleRatingChange={handleRating}
+        />
         <Box className={classes.content}>
           <Switch>
             <Route path="/movie">
