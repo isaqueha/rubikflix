@@ -1,4 +1,47 @@
-# Getting Started with Create React App
+# Rubik Flix
+
+Small React application connecting to [The Movie Database](https://www.themoviedb.org/) API.
+
+Built as used by a local movie theater, offering basically:
+
+- Movie Discovery;
+- Movie Search;
+- Filtering by Rating;
+- Movie Details;
+
+Built to showcase and exercise application building.
+
+## References
+
+- API: https://developers.themoviedb.org/3
+
+  - By default, the discover api already brings movies sorted by popularity: https://developers.themoviedb.org/3/discover/movie-discover
+
+- Material UI Components:
+
+  - Grid Material UI: https://material-ui.com/components/grid/
+
+- Design
+
+  - Details: https://dribbble.com/shots/14791304-Movies-app-design/attachments/6497678?mode=media
+  - Home screen: https://dribbble.com/shots/1682568-Flixus-Homepage-WIP/attachments/266477?mode=media
+
+## Todo:
+
+- Header:
+
+  - Small size page needs a filter dialog
+
+- Discover page:
+
+  - Rubik theming: https://www.schemecolor.com/rubik-cube-colors-new.php
+  - https://webdesign.tutsplus.com/tutorials/how-to-use-svg-patterns-as-backgrounds--cms-31507
+
+- Lazy loading: https://web.dev/code-splitting-suspense/?utm_source=lighthouse&utm_medium=devtools
+- Use Redux: https://react-redux.js.org/introduction/quick-start
+  - Filter: https://stackoverflow.com/questions/40342381/react-redux-create-a-search-filter
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,29 +111,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### Links
-
-- Details: https://dribbble.com/shots/14791304-Movies-app-design/attachments/6497678?mode=media
-- Home screen: https://dribbble.com/shots/1682568-Flixus-Homepage-WIP/attachments/266477?mode=media
-- Grid Material UI: https://material-ui.com/components/grid/
-- By default, the discover api already brings movies sorted by popularity: https://developers.themoviedb.org/3/discover/movie-discover
-
-### Todo/BUGS
-
-- Componentizate big components
-- Format everything to same
-- Remove unused references
-- Remove unused libraries in package.json
-- Remove comments
-- Separate in Pages
-
-- Discover page:
-  - Rubik theming
-- Header:
-
-  - Small size page needs a filter dialog
-
-- Lazy loading: https://web.dev/code-splitting-suspense/?utm_source=lighthouse&utm_medium=devtools
-- Redux: https://react-redux.js.org/introduction/quick-start
-  - Filter: https://stackoverflow.com/questions/40342381/react-redux-create-a-search-filter
