@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Discover from "./components/discover";
+import Content from "./components/content";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Detail from "./components/detail";
 import Header from "./components/header";
@@ -55,7 +55,7 @@ function App() {
               <Detail />
             </Route>
             <Route exact path="/">
-              <Discover query={search} rating={rating} />
+              <Content query={search} rating={rating} />
             </Route>
           </Switch>
         </Box>
