@@ -27,7 +27,7 @@ function App() {
 
   const handleSearch = (event) => {
     const searchString = event.target.value;
-    setSearch(searchString);
+    setSearch(searchString.trim());
   };
 
   const handleRating = (event) => {

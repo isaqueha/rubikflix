@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardActionArea,
@@ -7,24 +7,29 @@ import {
   Grid,
   makeStyles,
   Typography,
-} from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import api from '../services/api';
-import { useHistory } from 'react-router-dom';
-import notFoundImage from '../static/not-found-cube.jpg';
+} from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
+import api from "../services/api";
+import { useHistory } from "react-router-dom";
+import notFoundImage from "../static/not-found-cube.jpg";
 
 const useStyles = makeStyles({
   card: {
-    width: '300px',
-    height: '34rem',
+    width: "300px",
+    height: "34rem",
     margin: 10,
   },
   image: {
-    height: '28rem',
+    height: "28rem",
   },
 });
 
-const Movies = ({ path, query, rating }) => {
+const paths = {
+  discover: "/discover/movie",
+  search: "/search/movie",
+};
+
+const Movies = ({ query, rating }) => {
   const classes = useStyles();
   const [titles, setTitles] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
@@ -34,17 +39,25 @@ const Movies = ({ path, query, rating }) => {
     history.push(`/movie/${title.id}`);
   };
 
+  const fetchPath = async (path) => {
+    let request = await api.get(path, {
+      params: {
+        query: query,
+      },
+    });
+    setTitles(request.data.results);
+  };
+
   useEffect(() => {
-    const fetchPath = async () => {
-      let request = await api.get(path, {
-        params: {
-          query: query,
-        },
-      });
-      setTitles(request.data.results);
-    };
-    fetchPath();
-  }, [query, path]);
+    let path = "";
+    if (query !== "") {
+      path = paths.search;
+    } else {
+      path = paths.discover;
+    }
+
+    fetchPath(path);
+  }, [query]);
 
   useEffect(() => {
     if (rating === null) {
@@ -70,7 +83,7 @@ const Movies = ({ path, query, rating }) => {
                     ? `https://image.tmdb.org/t/p/w500/${title.poster_path}`
                     : notFoundImage
                 }
-                title={title.poster_path ? title.title : 'Image unavailable'}
+                title={title.poster_path ? title.title : "Image unavailable"}
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" noWrap>
