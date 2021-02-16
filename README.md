@@ -9,7 +9,26 @@ Built as used by a local movie theater, offering basically:
 - Filtering by Rating;
 - Movie Details;
 
-Built to showcase and exercise application building.
+Built to showcase and exercise application building.\
+To install this application and run it, please see [the Available Scripts section](#Available-Scripts)
+
+## Libraries
+
+### `material-ui`
+
+Material-UI was the chosen library for UI components, since it gives fast prototyping and usage.\
+Affinity and experience also influenced on this choice.\
+
+Styled Components library could be used as well, but it would introduce overhead on building the components from scratch.
+
+### `axios`
+
+Chosen library to connect to TMDB APIs, as it requires little setup and it is pretty straightforward.\
+Implementation can be found in the [`api.js` file.](./src/services/api.js)
+
+### `react-router`
+
+Picked to introduce Home Page <> Detail navigation, allowing loading a Detail page directly by its url.\
 
 ## References
 
@@ -28,6 +47,8 @@ Built to showcase and exercise application building.
 
 ## Todo:
 
+Those features are marked as future improvements and bug fixing
+
 - Header:
 
   - Small size page needs a filter dialog
@@ -36,6 +57,10 @@ Built to showcase and exercise application building.
 
   - Rubik theming: https://www.schemecolor.com/rubik-cube-colors-new.php
   - https://webdesign.tutsplus.com/tutorials/how-to-use-svg-patterns-as-backgrounds--cms-31507
+
+- Detail page:
+
+  - Back button hovering over title on initial page load
 
 - Lazy loading: https://web.dev/code-splitting-suspense/?utm_source=lighthouse&utm_medium=devtools
 - Use Redux: https://react-redux.js.org/introduction/quick-start
@@ -48,6 +73,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `yarn install`
+
+Installs the dependencies for this application.\
+You can run `npm run install` alternatively.
 
 ### `yarn start`
 
